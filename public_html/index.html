@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jQuery UIとjQuery Mobileの同時利用</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="js/libs/jqueryui/css/jquery-ui.min.css"> 
+        <link rel="stylesheet" href="js/libs/jquery-mobile/jquery.mobile.min.css" />
+        <style>
+            #d1, #d2 {
+                border: 1px solid gray;
+            }
+            #d1 {
+                width: 100px;
+            }
+        </style>
+    </head>
+    <body>
+        <div data-role="page">
+
+            <div data-role="header">
+                <h1>jQuery UIとjQuery Mobileの同時利用</h1>
+            </div><!-- /header -->
+
+            <div role="main" class="ui-content">
+
+                <div id="d1">jQuery UI Draggable</div>
+
+                <div id="d2">jQuery UI droppable<br><br><br></div>
+
+                <input class="ui-btn" id="open-ui-dialog" type="button" value="jQUery UIダイアログを表示">
+
+                <div id="dialog" title="jQuery UIダイアログ">
+                    <p>jQuery UIのダイアログです</p>
+                </div>
+                
+                <a href="#popupDialog" data-rel="popup" 
+                   data-position-to="window" data-transition="pop" class="ui-btn">jQuery Mobileダイアログを表示</a>
+
+                <div data-role="popup" id="popupDialog" data-dismissible="true">
+                    <div data-role="header" >
+                        <h1>jQuery Mobile ダイアログ</h1>
+                    </div>
+                    <div role="main" class="ui-content">
+                        <h3 class="ui-title">ダイアログです</h3>
+                        <p>ここにメッセージを表示します</p>
+                        <a href="#" class="ui-btn" data-rel="back">閉じる</a>
+                    </div>
+                </div>
+                
+                
+            </div><!-- /content -->
+
+            <div data-role="footer">
+                <h4>jQuery Mobile ページフッタ</h4>
+            </div><!-- /footer -->
+        </div><!-- /page -->        
+
+        <script type="text/javascript" src="js/libs/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="js/libs/jquery-mobile/jquery.mobile.min.js"></script>
+        <script type="text/javascript" src="js/libs/jqueryui/jquery-ui.min.js"></script>
+        <script type="text/javascript">
+            $(function () {
+                $("#d1").draggable();
+                $("#d2").droppable({
+                    drop: function () {
+                        $(this).append('drop!!!');
+                    }
+                });
+                $("#dialog").dialog({
+                    autoOpen: false
+                });
+                $("#open-ui-dialog").click(function () {
+                    $("#dialog").dialog("open");
+                });
+            });
+        </script>
+    </body>
+</html>
